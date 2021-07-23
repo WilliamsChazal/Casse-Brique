@@ -13,7 +13,7 @@ let dy = -8;
 //Fonction de dessin de la raquette
 function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height-paddleHeight, paddleHeight, paddleWidht);
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidht, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
