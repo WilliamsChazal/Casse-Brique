@@ -21,3 +21,13 @@ Toutes les 10 millisecondes, le canvas est effacé, la balle est dessinée sur u
 
 Rebondir en haut et en bas
 Il y a 4 murs en tout mais nous allons d'abord nous pencher sur le mur du haut. Nous devons, à chaque rafraichissement du canvas, regarder si la balle touche le bord du haut. Si c'est le cas, alors nous devons inverser la direction de la balle pour créer un effet de limite de zone de jeu. Il ne faut surtout pas oublier que le point d'origine est en haut à gauche !
+
+
+Permettre à l'utilisateur de contrôler la raquette
+Nous pouvons dessiner la raquette où nous voulons, mais elle doit répondre aux actions de l'utilisateur. Il est temps de mettre en place certaines commandes au clavier. Nous aurons besoin de ce qui suit :
+ 
+
+Deux variables pour stocker des informations sur l'état des touches "gauche" et "droite".
+Deux écouteurs d'événements pour les événements keydown et keyup du clavier. Nous voulons exécuter un code pour gérer le mouvement de la raquette lorsque des appuis sur les touches.
+Deux fonctions gérant les événements keydown et keyup et le code qui sera exécuté lorsque les touches sont pressées.
+La possibilité de déplacer la raquette vers la gauche et vers la droite
