@@ -16,6 +16,27 @@ let y = canvas.height-30;
 let dx = 2;
 let dy = -8;
 
+document.getElementById("keydown", keyDownHandler, false);
+document.getElementById("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
+  if(e.key == "Right" || e.key == "ArrowRight"){
+    rightPressed = true;
+  }
+else if (e.key == "Left" || e.key == "ArrowLeft"){
+  leftPressed = true;
+}
+console.log(e);
+}
+function keyUpHandler(e) {
+  if(e.key == "Right" || e.key == "ArrowRight"){
+    rightPressed = false;
+  }
+else if (e.key == "Left" || e.key == "ArrowLeft"){
+  leftPressed = false;
+}
+}
+
 //Fonction de dessin de la balle
 function drawBall() {
     // le code pour dessiner
@@ -34,14 +55,13 @@ function drawPaddle() {
   ctx.fill();
   ctx.closePath();
 }
-console.log(drawPaddle);
 
 // Fonctions pour effacer le canvas avant chaque frame
 function draw(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
     drawBall(); 
-
-    // les IF qui suivent permettent de faire rebondire la balle sur les 4 bords du canvas rajouter la variable ballRadius permet de calculer par rapport au radius de la ball et non au centre de la ball avec <0
+ 
+     // les IF qui suivent permettent de faire rebondire la balle sur les 4 bords du canvas rajouter la variable ballRadius permet de calculer par rapport au radius de la ball et non au centre de la ball avec <0
     if (y + dy > canvas.height-ballRadius || y +dy < ballRadius) {
         dy = -dy;
         ctx.fillStyle ="red" ;
@@ -52,10 +72,21 @@ function draw(){
         ctx.fillStyle ="red" ;
         ctx.fill();            
     }
+    if(rightPressed) {
+      paddleX += 7;
+  }
+  else if(leftPressed) {
+      paddleX -= 7;
+  }
+  drawPaddle();
     x += dx;
     y += dy;
 }
   setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
+
+
+
+
 
 
 /* // Premier chemin

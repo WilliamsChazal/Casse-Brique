@@ -31,3 +31,6 @@ Deux variables pour stocker des informations sur l'état des touches "gauche" et
 Deux écouteurs d'événements pour les événements keydown et keyup du clavier. Nous voulons exécuter un code pour gérer le mouvement de la raquette lorsque des appuis sur les touches.
 Deux fonctions gérant les événements keydown et keyup et le code qui sera exécuté lorsque les touches sont pressées.
 La possibilité de déplacer la raquette vers la gauche et vers la droite
+
+Lorsque l'événement keydown est déclenché par l'appui d'une des touches de votre clavier (lorsqu'elles sont enfoncées), la fonction keyDownHandler() est exécutée. Le même principe est vrai pour le deuxième écouteur : les événements keyup activent la fonction keyUpHandler() (lorsque les touches cessent d'être enfoncées).
+Quand on presse une touche du clavier, l'information est stockée dans une variable. La variable concernée est mis sur true. Quand la touche est relachée, la variable revient à  false.
