@@ -3,11 +3,11 @@ const ctx =canvas.getContext("2d")
 const ballRadius = 20; // Variable qui contient le rayon du cercle dessiné et sera utilisée pour les calculs. 
 const paddleHeight = 10;
 const paddleWidth =75;
-const paddleX =(canvas.width-paddleWidth/2); // Variable point de départ de la raquette 
+let paddleX =(canvas.width-paddleWidth)/2; // Variable point de départ de la raquette 
 
 // Variable qui stipule que les touches sont de base pas enfoncé que la valeur est fausse
-const rightPressed = false;
-const leftPressed = false;
+let rightPressed = false;
+let leftPressed = false;
 // position de départ de la balle 
 let x = canvas.width/2; 
 let y = canvas.height-30;
@@ -16,8 +16,10 @@ let y = canvas.height-30;
 let dx = 2;
 let dy = -8;
 
-document.getElementById("keydown", keyDownHandler, false);
-document.getElementById("keyup", keyUpHandler, false);
+
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
   if(e.key == "Right" || e.key == "ArrowRight"){
@@ -73,10 +75,17 @@ function draw(){
         ctx.fill();            
     }
     if(rightPressed) {
-      paddleX += 7;
+      paddleX += 5;
+      if (paddleX + paddleWidth > canvas.width){
+          paddleX = canvas.width - paddleWidth;
+      }
   }
   else if(leftPressed) {
-      paddleX -= 7;
+      paddleX -= 5;
+      if (paddleX < 0) {
+        paddleX = 0;
+        
+      }
   }
   drawPaddle();
     x += dx;
