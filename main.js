@@ -13,7 +13,7 @@ const brickOffSetLeft = 30;
 
 let paddleX =(canvas.width-paddleWidth)/2; // Variable point de départ de la raquette 
   // Tableau contenant les bricks
-let bricks = [];
+const bricks = [];
   // Colonnes de briques
 for(let c=0; c<brickColumnCount; c++){
   bricks[c] = [];
@@ -81,10 +81,10 @@ function drawBricks() {
     for(let r=0; r<brickRowCount; r++){
       let brickX = (c*(brickwidth+brickPadding))+brickOffSetLeft;
       let brickY = (r*(brickHeight+brickPadding))+brickOffSetTop;
-      bricks[c][r].x = 0;
-      bricks[c][r].y = 0;
+      bricks[c][r].x = brickX;
+      bricks[c][r].y = brickY;
       ctx.beginPath();
-      ctx.rect(0,0,brickwidth,brickHeight);
+      ctx.rect(brickX,brickY,brickwidth,brickHeight);
       ctx.fillStyle = "#0095DD";
       ctx.fill();
       ctx.closePath();
@@ -96,6 +96,7 @@ function drawBricks() {
  function draw(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
     drawBall();
+    drawPaddle();
     drawBricks(); 
  
      // les IF qui suivent permettent de faire rebondire la balle sur les 4 bords du canvas rajouter la variable ballRadius permet de calculer par rapport au radius de la ball et non au centre de la ball avec <0
@@ -137,7 +138,7 @@ function drawBricks() {
         
       }
   }
-  drawPaddle();
+  
     x += dx;
     y += dy;
 } 
