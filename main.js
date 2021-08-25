@@ -3,7 +3,25 @@ const ctx =canvas.getContext("2d")
 const ballRadius = 20; // Variable qui contient le rayon du cercle dessiné et sera utilisée pour les calculs. 
 const paddleHeight = 10;
 const paddleWidth =75;
+const brickRowCount = 3;
+const brickColumnCount = 5;
+const brickwidth = 75;
+const brickHeight = 20;
+const brickPadding = 10;
+const brickOffSetTop = 30;
+const brickOffSetLeft = 30;
+
 let paddleX =(canvas.width-paddleWidth)/2; // Variable point de départ de la raquette 
+  // Tableau contenant les bricks
+let bricks = [];
+  // Colonnes de briques
+for(let c=0; c<brickColumnCount; c++){
+  bricks[c] = [];
+  // Lignes de briques
+  for(let r=0; r<brickRowCount; r++){
+    bricks[c][r] = {x: 0, y:0};
+  }
+}
 
 // Variable qui stipule que les touches sont de base pas enfoncé que la valeur est fausse
 let rightPressed = false;
@@ -58,22 +76,54 @@ function drawPaddle() {
   ctx.closePath();
 }
 
+function drawBricks() {
+  for(let c=0; c<brickColumnCount; c++){
+    for(let r=0; r<brickRowCount; r++){
+      let brickX = (c*(brickwidth+brickPadding))+brickOffSetLeft;
+      let brickY = (r*(brickHeight+brickPadding))+brickOffSetTop;
+      bricks[c][r].x = 0;
+      bricks[c][r].y = 0;
+      ctx.beginPath();
+      ctx.rect(0,0,brickwidth,brickHeight);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+}
+
 // Fonctions pour effacer le canvas avant chaque frame
-function draw(){
+ function draw(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    drawBall(); 
+    drawBall();
+    drawBricks(); 
  
      // les IF qui suivent permettent de faire rebondire la balle sur les 4 bords du canvas rajouter la variable ballRadius permet de calculer par rapport au radius de la ball et non au centre de la ball avec <0
-    if (y + dy > canvas.height-ballRadius || y +dy < ballRadius) {
+     if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+      dx = -dx
+      ctx.fillStyle ="red" ;
+      ctx.fill();            
+  }
+   // le if çi dessous permet de savoir si la balle touche la raquette et si oui, la balle rebondit, si non une alerte s'affiche et recharge la page.
+     if (y + dy < ballRadius) {
         dy = -dy;
         ctx.fillStyle ="red" ;
         ctx.fill()  
+    } else if (y + dy > canvas.height-ballRadius) {
+      if (x > paddleX && x < paddleX + paddleWidth) {
+        dy = -dy
+        ctx.fillStyle ="green" ;
+        ctx.fill() 
+        
+      }
+      else  {
+        alert("GAME OVER");
+        document.location.reload();
+        clearInterval(ineterval);
+      }
     }
-    if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-        dx = -dx
-        ctx.fillStyle ="red" ;
-        ctx.fill();            
-    }
+    
+    
     if(rightPressed) {
       paddleX += 5;
       if (paddleX + paddleWidth > canvas.width){
@@ -90,8 +140,8 @@ function draw(){
   drawPaddle();
     x += dx;
     y += dy;
-}
-  setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
+} 
+  let ineterval = setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
 
 
 
