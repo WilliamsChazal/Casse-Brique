@@ -34,3 +34,11 @@ La possibilité de déplacer la raquette vers la gauche et vers la droite
 
 Lorsque l'événement keydown est déclenché par l'appui d'une des touches de votre clavier (lorsqu'elles sont enfoncées), la fonction keyDownHandler() est exécutée. Le même principe est vrai pour le deuxième écouteur : les événements keyup activent la fonction keyUpHandler() (lorsque les touches cessent d'être enfoncées).
 Quand on presse une touche du clavier, l'information est stockée dans une variable. La variable concernée est mis sur true. Quand la touche est relachée, la variable revient à  false.
+
+
+Si le centre de la balle se trouve à l'intérieur des coordonnées d'une de nos briques, nous changerons la direction de la balle. Pour que le centre de la balle soit à l'intérieur de la brique, les quatre affirmations suivantes doivent être vraies :
+
+La position x de la balle est supérieure à la position x de la brique.
+La position x de la balle est inférieure à la position x de la brique plus sa largeur.
+La position y de la balle est supérieure à la position y de la brique.
+La position y de la balle est inférieure à la position y de la brique plus sa hauteur.

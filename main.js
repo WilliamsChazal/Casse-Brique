@@ -5,7 +5,7 @@ const paddleHeight = 10;
 const paddleWidth =75;
 const brickRowCount = 3;
 const brickColumnCount = 5;
-const brickwidth = 75;
+const brickWidth = 75;
 const brickHeight = 20;
 const brickPadding = 10;
 const brickOffSetTop = 30;
@@ -19,7 +19,7 @@ for(let c=0; c<brickColumnCount; c++){
   bricks[c] = [];
   // Lignes de briques
   for(let r=0; r<brickRowCount; r++){
-    bricks[c][r] = {x: 0, y:0};
+    bricks[c][r] = {x: 0, y:0, status:1};
   }
 }
 
@@ -33,6 +33,8 @@ let y = canvas.height-30;
 
 let dx = 2;
 let dy = -8;
+
+let ineterval = setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
 
 
 
@@ -57,6 +59,26 @@ else if (e.key == "Left" || e.key == "ArrowLeft"){
 }
 }
 
+function collisionDetection() {
+  for(let c=0; c<brickColumnCount; c++) {
+      for(let r=0; r<brickRowCount; r++) {// b est une variable permettant de stocker l'objet bricks dans la boucle de detection de collision
+          let b = bricks[c][r];
+          if (b.status == 1){
+          // calculs
+          if(x > b.x // La position x de la balle est supérieure à la position x de la brique.
+            && x < b.x+brickWidth // La position x de la balle est inférieure à la position x de la brique plus sa largeur.
+            && y > b.y //La position y de la balle est supérieure à la position y de la brique.
+             && y < b.y+brickHeight) //La position y de la balle est inférieure à la position y de la brique plus sa hauteur.
+             {
+            dy = -dy;
+            b.status =0;
+          } 
+
+          }
+      }
+  }
+}
+
 //Fonction de dessin de la balle
 function drawBall() {
     // le code pour dessiner
@@ -79,24 +101,29 @@ function drawPaddle() {
 function drawBricks() {
   for(let c=0; c<brickColumnCount; c++){
     for(let r=0; r<brickRowCount; r++){
-      let brickX = (c*(brickwidth+brickPadding))+brickOffSetLeft;
-      let brickY = (r*(brickHeight+brickPadding))+brickOffSetTop;
-      bricks[c][r].x = brickX;
-      bricks[c][r].y = brickY;
-      ctx.beginPath();
-      ctx.rect(brickX,brickY,brickwidth,brickHeight);
-      ctx.fillStyle = "#0095DD";
-      ctx.fill();
-      ctx.closePath();
+      if (bricks[c][r].status == 1) { //Si status vaut 1, dessinez-la, mais s'il vaut 0, la balle a été touchée et nous ne voulons pas la voir sur l'écran.
+        let brickX = (c*(brickWidth+brickPadding))+brickOffSetLeft;
+        let brickY = (r*(brickHeight+brickPadding))+brickOffSetTop;
+        bricks[c][r].x = brickX;
+        bricks[c][r].y = brickY;
+        ctx.beginPath();
+        ctx.rect(brickX,brickY,brickWidth,brickHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+      }
     }
   }
 }
+
+
 
 // Fonctions pour effacer le canvas avant chaque frame
  function draw(){
     ctx.clearRect(0,0, canvas.width, canvas.height);
     drawBall();
     drawPaddle();
+    collisionDetection();
     drawBricks(); 
  
      // les IF qui suivent permettent de faire rebondire la balle sur les 4 bords du canvas rajouter la variable ballRadius permet de calculer par rapport au radius de la ball et non au centre de la ball avec <0
@@ -142,7 +169,7 @@ function drawBricks() {
     x += dx;
     y += dy;
 } 
-  let ineterval = setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
+
 
 
 
