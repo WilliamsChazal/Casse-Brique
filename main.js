@@ -35,6 +35,9 @@ let dx = 2;
 let dy = -8;
 
 let ineterval = setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
+let score = 0
+let lives = 3;
+
 
 
 
@@ -71,7 +74,13 @@ function collisionDetection() {
              && y < b.y+brickHeight) //La position y de la balle est inférieure à la position y de la brique plus sa hauteur.
              {
             dy = -dy;
-            b.status =0;
+            b.status =0
+            score++;
+            if (score == brickRowCount*brickColumnCount) {
+              alert("C'est gagné, Bravo", + "Vous avez cassé" + score+ " birques");
+              document.location.reload();
+              clearInterval(interval);
+            }   
           } 
 
           }
@@ -116,6 +125,17 @@ function drawBricks() {
   }
 }
 
+function drawScore(){
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText("Score: "+score,8,20);
+}
+
+function drawlives (){
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+}
 
 
 // Fonctions pour effacer le canvas avant chaque frame
@@ -125,29 +145,35 @@ function drawBricks() {
     drawPaddle();
     collisionDetection();
     drawBricks(); 
+    drawScore();
+    drawLives();
  
      // les IF qui suivent permettent de faire rebondire la balle sur les 4 bords du canvas rajouter la variable ballRadius permet de calculer par rapport au radius de la ball et non au centre de la ball avec <0
      if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-      dx = -dx
-      ctx.fillStyle ="red" ;
-      ctx.fill();            
+      dx = -dx 
+                
   }
    // le if çi dessous permet de savoir si la balle touche la raquette et si oui, la balle rebondit, si non une alerte s'affiche et recharge la page.
      if (y + dy < ballRadius) {
         dy = -dy;
-        ctx.fillStyle ="red" ;
-        ctx.fill()  
     } else if (y + dy > canvas.height-ballRadius) {
       if (x > paddleX && x < paddleX + paddleWidth) {
-        dy = -dy
-        ctx.fillStyle ="green" ;
-        ctx.fill() 
-        
+        dy = -dy 
       }
       else  {
-        alert("GAME OVER");
+        lives--;
+        if (!lives) {
+        alert("GAME OVER " + "  " + "Vous avez cassé" + score+ " birques");
         document.location.reload();
         clearInterval(ineterval);
+      } else{
+        x = canvas.width/2;
+        y = canvas.height-30;
+        dx =2;
+        dy=-8;
+        paddleX = (canvas.width-paddleWidth)/2
+      
+        }
       }
     }
     
@@ -165,6 +191,7 @@ function drawBricks() {
         
       }
   }
+
   
     x += dx;
     y += dy;
