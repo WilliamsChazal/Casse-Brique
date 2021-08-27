@@ -34,7 +34,7 @@ let y = canvas.height-30;
 let dx = 2;
 let dy = -8;
 
-let ineterval = setInterval(draw, 20); // la fonction draw() sera exécutée toutes les 10 millisecondes. 
+/* let ineterval = setInterval(draw, 20) */; // la fonction draw() sera exécutée toutes les 10 millisecondes. 
 let score = 0
 let lives = 3;
 
@@ -77,9 +77,9 @@ function collisionDetection() {
             b.status =0
             score++;
             if (score == brickRowCount*brickColumnCount) {
-              alert("C'est gagné, Bravo", + "Vous avez cassé" + score+ " birques");
+              alert("C'est gagné, Bravo",  "Vous avez cassé" + score+ " birques");
               document.location.reload();
-              clearInterval(interval);
+             
             }   
           } 
 
@@ -131,7 +131,7 @@ function drawScore(){
   ctx.fillText("Score: "+score,8,20);
 }
 
-function drawlives (){
+function drawLives (){
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Lives: "+lives, canvas.width-65, 20);
@@ -165,7 +165,7 @@ function drawlives (){
         if (!lives) {
         alert("GAME OVER " + "  " + "Vous avez cassé" + score+ " birques");
         document.location.reload();
-        clearInterval(ineterval);
+
       } else{
         x = canvas.width/2;
         y = canvas.height-30;
@@ -195,7 +195,10 @@ function drawlives (){
   
     x += dx;
     y += dy;
+
+requestAnimationFrame(draw);
 } 
+draw();
 
 
 

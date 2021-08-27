@@ -8,3 +8,11 @@ canvas{
     display: block;
     margin: 0 auto;
 }
+
+.titre{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-family: 'kremlin';
+}
