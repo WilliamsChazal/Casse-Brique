@@ -4,15 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="ico-jeux.svg" type="image/x-icon">
+    <meta name="description" content="Casse-Brique en suivant le tutoriel MDN">
     <title>Casse-brique</title>
 </head>
 <body>
 
-   <div class='titre'>Casse-Briques</div>
+   <div class='titre'><h1>Casse-Briques</h1></div>
+<div class="rules">
+    <p>Déplacer vous en utilisant les touches Q et D ou les flèches directionnelles pour vous déplacer</p>
+</div>
     <canvas id="myCanvas" width="480" height="320"></canvas>
-    
-
-<script src="main.js"></script>
+    <div class="startGame">
+        <button id='jouer'>Jouer</button>
+    </div>
+    <div class="casse-brique-git">
+        <a href="http://https://github.com/WilliamsChazal/Casse-Brique" target="_blank" rel="noopener noreferrer">
+            <img src="github.svg" alt="icone github" srcset="">
+        </a>
+    </div>
+<script src="index.js"></script>
 </body>
 </html>

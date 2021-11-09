@@ -1,18 +1,80 @@
+:root{
+    --couleur-primaire_transparent:#202231;
+    --couleur-secondaire:#8C031A;
+    --couleur-tertiaire:#EDF2F4;
+    --couleur-degrade:linear-gradient(rgba(07,14,30, 0.5) rgba(217,4,21, 0.5));
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
 *{
     padding: 0;
     margin: 0;
+}
+
+body{
+    background: rgba(07,14,30);
+    color: #EDF2F4;
+    font-family: 'Staatliches', cursive;
 }
 
 canvas{
     background: #dbd7d7;
     display: block;
     margin: 0 auto;
+    outline: solid#b10420 5px;
 }
 
 .titre{
     display: flex;
     justify-content: center;
     margin-top: 25px;
-    margin-bottom: 25px;
-    font-family: 'kremlin';
+    margin-bottom: 5px;
+    font-size: 48px;
+}
+
+.startGame{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.rules{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px; 
+    font-size: 22px;
+}
+#jouer{
+        background-color: var(--couleur-tertiaire);
+        color: var(--couleur-primaire_transparent);
+        width: 175px;
+        height: 40px;
+        border-radius: 20px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding-top: 5px;
+        font-family: 'Staatliches', cursive;
+        font-size: 24px;
+        border: none;
+        margin: 25px 0 0 0;
+      }
+      
+      #jouer:hover{
+        background-color: var(--couleur-secondaire);
+        color: white;
+        box-shadow: 5px 5px 2px 1px var(--couleur-primaire_transparent);
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .casse-brique-git {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+img:hover{
+    border: #EDF2F4 5px solid;
+    border-radius: 55px;
 }
